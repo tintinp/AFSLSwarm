@@ -1,0 +1,6 @@
+C:\SwarmUI\SwarmLibrary\bin\Debug\SwarmLibrary.dll
+C:\SwarmUI\SwarmLibrary\bin\Debug\SwarmLibrary.pdb
+C:\SwarmUI\SwarmLibrary\obj\Debug\SwarmLibrary.csprojResolveAssemblyReference.cache
+C:\SwarmUI\SwarmLibrary\obj\Debug\SwarmLibrary.csproj.CoreCompileInputs.cache
+C:\SwarmUI\SwarmLibrary\obj\Debug\SwarmLibrary.dll
+C:\SwarmUI\SwarmLibrary\obj\Debug\SwarmLibrary.pdb

@@ -1,0 +1,12 @@
+C:\SwarmUI\SwarmUI\bin\Debug\SwarmUI.exe.config
+C:\SwarmUI\SwarmUI\bin\Debug\SwarmUI.exe
+C:\SwarmUI\SwarmUI\bin\Debug\SwarmUI.pdb
+C:\SwarmUI\SwarmUI\obj\Debug\SwarmUI.csprojResolveAssemblyReference.cache
+C:\SwarmUI\SwarmUI\obj\Debug\SwarmUI.Swarm.resources
+C:\SwarmUI\SwarmUI\obj\Debug\SwarmUI.Properties.Resources.resources
+C:\SwarmUI\SwarmUI\obj\Debug\SwarmUI.csproj.GenerateResource.Cache
+C:\SwarmUI\SwarmUI\obj\Debug\SwarmUI.csproj.CoreCompileInputs.cache
+C:\SwarmUI\SwarmUI\obj\Debug\SwarmUI.exe
+C:\SwarmUI\SwarmUI\obj\Debug\SwarmUI.pdb
+C:\SwarmUI\SwarmUI\bin\Debug\SwarmLibrary.dll
+C:\SwarmUI\SwarmUI\bin\Debug\SwarmLibrary.pdb
