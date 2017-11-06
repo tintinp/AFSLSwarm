@@ -1,0 +1,13 @@
+Copy n Paste Commands
+
+Start copter simulation
+dronekit-sitl copter --home=47.653364,-122.307344,151,353
+
+For simulated vehicle
+mavproxy.exe --master="tcp:127.0.0.1:5760" --out="udp:10.18.247.224:14552" --out="udp:10.18.247.224:14553"
+
+For real vehicle
+mavproxy.exe --master="com7" --out="udp:172.20.10.2:14550" --out="udp:172.20.10.:214551"
+
+Change directory
+cd C:\Users\Admin1\Documents\AFSL
