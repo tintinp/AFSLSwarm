@@ -4,6 +4,8 @@ from dronekit import connect, VehicleMode
 import dronekit_sitl
 import time
 import argparse
+import math
+import re
 
 # Tests GPS accuracy.
 parser = argparse.ArgumentParser(description="Gets two vehicle connection strings")
@@ -17,7 +19,7 @@ if not args.target_acc:
 else:
     t_acc = args.target_acc
 file = open("GPS_accuracy.txt", 'w')
-file.write("Intended Distance Apart (m): {}".format(t_acc))
+file.write("Intended Distance Apart (m): {}\n".format(t_acc))
 
 sitl_1 = dronekit_sitl.start_default()
 sitl_2 = dronekit_sitl.start_default()
@@ -51,25 +53,20 @@ print("Connecting to {} 2 on: {}\n".format(v_type_2, connection_string_2,))
 vehic_2 = connect(connection_string_2, wait_ready=False)
 print("done")
 
-'''
-# Get some vehicle attributes (state)
-print "Get some vehicle attribute values:"
-print " GPS: %s" % vehicle.gps_0
-print " Battery: %s" % vehicle.battery
-print " Last Heartbeat: %s" % vehicle.last_heartbeat
-print " Is Armable?: %s" % vehicle.is_armable
-print " System status: %s" % vehicle.system_status.state
-print " Mode: %s" % vehicle.mode.name    # settable
-'''
-
-# Mission stuff
-vehicle.mode = VehicleMode("MANUAL")
-
-print(vehicle.location.global_frame)
-
-for _ in range(0, 100):
-    print("ground: %f air: %f".format(vehicle.groundspeed, vehicle.airspeed))
-    time.sleep(1)
+try: # Prints to console and writes to file position data
+    while True:
+        location_list_raw = [str(vehic_1.location.global_frame), str(vehic_2.location.global_frame)]
+        location_list = []
+        regex = r"(-?\d+\.\d+)" 
+        for loc in location_list_raw:  
+            match = re.findall(regex, loc) # This produces an empty list occasionally when using SITL vehicles. Low priority fix
+            location_list += [float(match[0]), float(match[1])]
+        diff = abs(math.sqrt((location_list[0] - location_list[2])**2 - (location_list[1] - location_list[3])**2))
+        print("Writing :: Pos_1: {}\t Pos_2: {}\n Diff: {}".format(vehic_1.location.global_frame, vehic_2.location.global_frame, diff))
+        file.write("Pos_1: {}\t Pos_2: {}\n Diff: {}".format(vehic_1.location.global_frame, vehic_2.location.global_frame, diff))
+        time.sleep(1)
+except KeyboardInterrupt:
+    print("Done writing")
 
 # Close vehicle object before exiting script
 vehic_1.close()
