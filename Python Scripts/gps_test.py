@@ -57,17 +57,22 @@ try: # Prints to console and writes to file position data
     while True:
         location_list_raw = [str(vehic_1.location.global_frame), str(vehic_2.location.global_frame)]
         location_list = []
-        regex = r"(-?\d+\.\d+)" 
+        regex = r"(-?\d+\.\d+)"
         for loc in location_list_raw:  
-            match = re.findall(regex, loc) # This produces an empty list occasionally when using SITL vehicles. Low priority fix
-            location_list += [float(match[0]), float(match[1])]
+            match = list(re.findall(regex, loc)) # This produces an empty list occasionally when using SITL vehicles. Low priority fix
+            if match:
+                location_list += [float(match[0]), float(match[1])]
+            else:
+                location_list += ["Location N/A", "Location N/A"]
         diff = abs(math.sqrt((location_list[0] - location_list[2])**2 - (location_list[1] - location_list[3])**2))
-        print("Writing :: Pos_1: {}\t Pos_2: {}\n Diff: {}".format(vehic_1.location.global_frame, vehic_2.location.global_frame, diff))
-        file.write("Pos_1: {}\t Pos_2: {}\n Diff: {}".format(vehic_1.location.global_frame, vehic_2.location.global_frame, diff))
+        print("Pos_1: Lat {} Long: {} \t Pos_2: Lat {} Long {} \nDiff: {}\n".format(location_list[0], location_list[1], location_list[2], location_list[3], diff))
+        file.write("Pos_1: Lat {} Long: {} \t Pos_2: Lat {} Long {} \nDiff: {}\n".format(location_list[0], location_list[1], location_list[2], location_list[3], diff))
         time.sleep(1)
 except KeyboardInterrupt:
     print("Done writing")
+file.close()
 
 # Close vehicle object before exiting script
 vehic_1.close()
 vehic_2.close()
+
